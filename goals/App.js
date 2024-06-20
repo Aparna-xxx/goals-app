@@ -1,17 +1,15 @@
 import { StyleSheet, Text, View,TextInput,Button, ScrollView, FlatList } from 'react-native';
 import { useState } from 'react';
-
+import GoalsOutput from './components/goalsOutput';
+import GoalsInput from './components/GoalsInput';
 export default function App() {
 
-  const [mytext, setMyText] = useState(''); //variable for the text input
+ 
   const [goalList, setGoalList] = useState([]); //array variable to store list of goals
  
-  function readText(enteredText){
-    setMyText(enteredText)
-    
-  }
+  
 
-  function buttonClicked(){
+  function buttonClicked(mytext){
     //console.log(mytext)
     setGoalList((currentGoals) => [...currentGoals, {text: mytext, id: Math.random().toString()}]) //add new goal
     //setGoalList([]);
@@ -23,17 +21,11 @@ export default function App() {
 
   return (
     <View style={styles.appcontainer}>
-      <View style={styles.headcontainer}>
-        <TextInput style={styles.input} placeholder='Your goals' onChangeText={readText}/>
-        <Button title="Add goal" onPress={buttonClicked}></Button>
-      </View>
+      <GoalsInput handleClick={buttonClicked}/>
       <View style = {styles.bodycontainer}>
       <FlatList  data={goalList}  renderItem={(itemObject)=>{
-        return (
-          <View style={styles.goalsStyle}>
-            <Text style={styles.goalText}> {itemObject.item.text} </Text>
-          </View>
-        )
+       return <GoalsOutput item={itemObject.item.text}/>
+        
       }} keyExtractor={(item,index)=>{
         return item.id;
       }}/>
@@ -75,15 +67,5 @@ const styles = StyleSheet.create({
     flex:5,
     //flexDirection:'row',
   },
-  goalsStyle:{
-    backgroundColor:'#D5C0F2',
-    margin:8,
-    padding: 8,
-    borderRadius:6,
-    
-    
-  },
-  goalText:{
-    color:'#4B0082',
-  }
+ 
 });
