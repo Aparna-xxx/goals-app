@@ -3,7 +3,8 @@ import { useState } from 'react';
 
 export default function App() {
 
-  const [mytext, setMyText] = useState('');
+  const [mytext, setMyText] = useState(''); //variable for the text input
+  const [goalList, setGoalList] = useState([]); //array variable to store list of goals
  
   function readText(enteredText){
     setMyText(enteredText)
@@ -11,7 +12,12 @@ export default function App() {
   }
 
   function buttonClicked(){
-    console.log(mytext)
+    //console.log(mytext)
+    setGoalList((currentGoals) => [...currentGoals, mytext]) //add new goal
+    //setGoalList([]);
+    //The function receives the current state of goalList as currentGoals.
+    //Using the spread operator, it creates a new array that contains all items from currentGoals, followed by mytext.
+    //The new array is returned and setGoalList updates the state with this new array.
   }
 
 
@@ -22,7 +28,7 @@ export default function App() {
         <Button title="Add goal" onPress={buttonClicked}></Button>
       </View>
       <View style = {styles.bodycontainer}>
-        <Text>List of items</Text>
+        {goalList.map((goal)=><Text key={goal}> {goal} </Text>)}
       </View>
     </View>
   );
