@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,TextInput,Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View,TextInput,Button, ScrollView, FlatList } from 'react-native';
 import { useState } from 'react';
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
 
   function buttonClicked(){
     //console.log(mytext)
-    setGoalList((currentGoals) => [...currentGoals, mytext]) //add new goal
+    setGoalList((currentGoals) => [...currentGoals, {text: mytext, id: Math.random().toString()}]) //add new goal
     //setGoalList([]);
     //The function receives the current state of goalList as currentGoals.
     //Using the spread operator, it creates a new array that contains all items from currentGoals, followed by mytext.
@@ -28,13 +28,22 @@ export default function App() {
         <Button title="Add goal" onPress={buttonClicked}></Button>
       </View>
       <View style = {styles.bodycontainer}>
-        <ScrollView>
+      <FlatList  data={goalList}  renderItem={(itemObject)=>{
+        return (
+          <View style={styles.goalsStyle}>
+            <Text style={styles.goalText}> {itemObject.item.text} </Text>
+          </View>
+        )
+      }} keyExtractor={(item,index)=>{
+        return item.id;
+      }}/>
+        {/* <ScrollView>
           {goalList.map((goal)=>(
             <View key={goal} style={styles.goalsStyle}>
             <Text style={styles.goalText}> {goal} </Text>
             </View>
             ))}
-        </ScrollView>
+        </ScrollView> */}
       </View>
     </View>
   );
