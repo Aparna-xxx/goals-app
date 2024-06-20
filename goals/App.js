@@ -1,11 +1,25 @@
 import { StyleSheet, Text, View,TextInput,Button } from 'react-native';
+import { useState } from 'react';
 
 export default function App() {
+
+  const [mytext, setMyText] = useState('');
+ 
+  function readText(enteredText){
+    setMyText(enteredText)
+    
+  }
+
+  function buttonClicked(){
+    console.log(mytext)
+  }
+
+
   return (
     <View style={styles.appcontainer}>
       <View style={styles.headcontainer}>
-        <TextInput style={styles.input} placeholder='Your goals'/>
-        <Button title="Add goal"></Button>
+        <TextInput style={styles.input} placeholder='Your goals' onChangeText={readText}/>
+        <Button title="Add goal" onPress={buttonClicked}></Button>
       </View>
       <View style = {styles.bodycontainer}>
         <Text>List of items</Text>
