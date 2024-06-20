@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,TextInput,Button } from 'react-native';
+import { StyleSheet, Text, View,TextInput,Button, ScrollView } from 'react-native';
 import { useState } from 'react';
 
 export default function App() {
@@ -28,11 +28,13 @@ export default function App() {
         <Button title="Add goal" onPress={buttonClicked}></Button>
       </View>
       <View style = {styles.bodycontainer}>
-        {goalList.map((goal)=>(
-          <View key={goal} style={styles.goalsStyle}>
-          <Text style={styles.goalText}> {goal} </Text>
-          </View>
-          ))}
+        <ScrollView>
+          {goalList.map((goal)=>(
+            <View key={goal} style={styles.goalsStyle}>
+            <Text style={styles.goalText}> {goal} </Text>
+            </View>
+            ))}
+        </ScrollView>
       </View>
     </View>
   );
