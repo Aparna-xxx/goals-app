@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View,TextInput,Button, ScrollView, FlatList } from 'react-native';
 import { useState } from 'react';
+import { StatusBar } from "expo-status-bar";
 import GoalsOutput from './components/GoalsOutput';
 import GoalsInput from './components/GoalsInput';
 export default function App() {
@@ -37,6 +38,8 @@ export default function App() {
 
 
   return (
+    <>
+    <StatusBar style='light'/> 
     <View style={styles.appcontainer}>
       <Button title = 'Add new goal' color='#4B0082' onPress={startAdding}/>
       <GoalsInput handleClick={buttonClicked}  visible={modalState} onCancel={stopAdding}/>
@@ -56,6 +59,7 @@ export default function App() {
         </ScrollView> */}
       </View>
     </View>
+    </>
   );
 }
 
@@ -64,23 +68,10 @@ const styles = StyleSheet.create({
     paddingTop:50,
     paddingHorizontal:16,
     flex:1,
+    
+    backgroundColor:'#290133',
   },
-  headcontainer:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems: 'center',
-    marginBottom:24,
-    borderBottomWidth:1,
-    borderBottomColor:'#cccccc',
-    flex:1,
-  },
-  input:{
-    borderColor:'black',
-    borderWidth:1,
-    width: '70%',
-    height:'30%',
-    marginRight:3,
-  },
+  
   bodycontainer:{
     flex:5,
     //flexDirection:'row',

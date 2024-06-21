@@ -18,7 +18,7 @@ export default GoalsOutput;
 const styles = StyleSheet.create({
 
     goalsStyle:{
-        backgroundColor:'#D5C0F2',
+        backgroundColor:'#E6E6FA',
         margin:8,
         
         borderRadius:6,
