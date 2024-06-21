@@ -6,6 +6,15 @@ export default function App() {
 
  
   const [goalList, setGoalList] = useState([]); //array variable to store list of goals
+  const [modalState,setModalState] = useState(false);
+
+  function startAdding(){
+    setModalState(true);
+  }
+
+  function stopAdding(){
+    setModalState(false);
+  }
  
   
 
@@ -16,6 +25,7 @@ export default function App() {
     //The function receives the current state of goalList as currentGoals.
     //Using the spread operator, it creates a new array that contains all items from currentGoals, followed by mytext.
     //The new array is returned and setGoalList updates the state with this new array.
+    stopAdding();
   }
 
   function goalClicked(id){
@@ -28,7 +38,8 @@ export default function App() {
 
   return (
     <View style={styles.appcontainer}>
-      <GoalsInput handleClick={buttonClicked} />
+      <Button title = 'Add new goal' color='#4B0082' onPress={startAdding}/>
+      <GoalsInput handleClick={buttonClicked}  visible={modalState} onCancel={stopAdding}/>
       <View style = {styles.bodycontainer}>
       <FlatList  data={goalList}  renderItem={(itemObject)=>{
        return <GoalsOutput item={itemObject.item.text} handleDelete={goalClicked} id={itemObject.item.id}/>
