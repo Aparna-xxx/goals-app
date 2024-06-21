@@ -11,10 +11,12 @@ function GoalsInput(props){
     setMyText(' ');
   }
     return(
-        <View style={styles.headcontainer}>
-        <TextInput style={styles.input} placeholder='Your goals' onChangeText={readText} value={mytext}/>
-        <Button title="Add goal" onPress={addGoalHandler}></Button>
-      </View>
+      
+          <View style={styles.headcontainer}>
+            <TextInput style={styles.input} placeholder='Your goals' onChangeText={readText} value={mytext}/>
+            <Button title="Add goal" onPress={addGoalHandler}></Button>
+          </View>
+      
     )
 }
 

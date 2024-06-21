@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View,TextInput,Button, ScrollView, FlatList } from 'react-native';
 import { useState } from 'react';
-import GoalsOutput from './components/goalsOutput';
+import GoalsOutput from './components/GoalsOutput';
 import GoalsInput from './components/GoalsInput';
 export default function App() {
 
@@ -18,13 +18,20 @@ export default function App() {
     //The new array is returned and setGoalList updates the state with this new array.
   }
 
+  function goalClicked(id){
+    //console.log("Deleted");
+    setGoalList((currentGoals) =>{
+      return currentGoals.filter((goal)=>goal.id !== id);
+    } ) 
+  }
+
 
   return (
     <View style={styles.appcontainer}>
-      <GoalsInput handleClick={buttonClicked}/>
+      <GoalsInput handleClick={buttonClicked} />
       <View style = {styles.bodycontainer}>
       <FlatList  data={goalList}  renderItem={(itemObject)=>{
-       return <GoalsOutput item={itemObject.item.text}/>
+       return <GoalsOutput item={itemObject.item.text} handleDelete={goalClicked} id={itemObject.item.id}/>
         
       }} keyExtractor={(item,index)=>{
         return item.id;
